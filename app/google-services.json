@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070383176160",
+    "project_id": "errandsproject-6f1c9",
+    "storage_bucket": "errandsproject-6f1c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070383176160:android:03990baf158d0a4f5c3385",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyUdk63K8AUYZBdexHQrVFWqactv3_FVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
