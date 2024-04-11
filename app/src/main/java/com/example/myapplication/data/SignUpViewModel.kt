@@ -4,51 +4,48 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ErrandAppRouter
-import com.example.myapplication.Screens.ErrandsAppNavigationGraph
-import com.example.myapplication.Screens.Screen
 import com.example.myapplication.data.rules.Validator
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginViewModel: ViewModel() {
+class SignUpViewModel: ViewModel() {
      lateinit var navController:NavController
 
-    private val TAG=LoginViewModel::class.simpleName
+    private val TAG=SignUpViewModel::class.simpleName
     var registrationUIState= mutableStateOf(RegistrationUIState())
     var AllValidationPassed= mutableStateOf(false)
-    fun onEvent(event:UIEvent){
+    var signUpInProgress= mutableStateOf(false)
+    fun onEvent(event:SignUpUIEvent){
         validateDataWithRules()
         when(event){
-            is UIEvent.FirstnameChanged->{
+            is SignUpUIEvent.FirstnameChanged->{
            registrationUIState.value=registrationUIState.value.copy(
                firstname = event.firstName
            )
                 printState()
             }
-            is UIEvent.LastnameChanged->{
+            is SignUpUIEvent.LastnameChanged->{
                 registrationUIState.value=registrationUIState.value.copy(
                     lastname = event.lastName
                 )
                 printState()
             }
-            is UIEvent.EmailChanged->{
+            is SignUpUIEvent.EmailChanged->{
                 registrationUIState.value=registrationUIState.value.copy(
                     email =event.Email
                 )
                 printState()
             }
-            is UIEvent.PasswordChanged->{
+            is SignUpUIEvent.PasswordChanged->{
                 registrationUIState.value=registrationUIState.value.copy(
                     password = event.Password
                 )
                 printState()
             }
-            is UIEvent.RegisterButtonClicked -> {
+            is SignUpUIEvent.RegisterButtonClicked -> {
                 signUp()
             }
-            is UIEvent.TermsCheckboxClicked -> {
+            is SignUpUIEvent.TermsCheckboxClicked -> {
                 registrationUIState.value=registrationUIState.value.copy(
                     termsAccepted = event.status
                 )
@@ -107,12 +104,13 @@ class LoginViewModel: ViewModel() {
 
 
     private fun createUserInFirebase(email:String,password:String){
+        signUpInProgress.value=true
      FirebaseAuth.getInstance()
          .createUserWithEmailAndPassword(email,password)
          .addOnCompleteListener {
              Log.d(TAG,"isSuccesful=${it.isSuccessful}")
              Log.d(TAG,"isSuccesful=${it.isSuccessful}")
-
+            signUpInProgress.value=false
              if(it.isSuccessful){
                  ErrandAppRouter.navigateTo(com.example.myapplication.Screen.LoginScreen)
              }
@@ -123,4 +121,7 @@ class LoginViewModel: ViewModel() {
          }
 
  }
+    fun logout(){
+
+    }
 }

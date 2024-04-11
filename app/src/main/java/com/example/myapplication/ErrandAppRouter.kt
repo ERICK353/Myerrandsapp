@@ -8,6 +8,7 @@ sealed class Screen{
      object TermsandConditions:Screen()
     object LoginScreen:Screen()
     object DashBoardScreen:Screen()
+    object AddErrandScreen:Screen()
 }
 object ErrandAppRouter {
     var currentscreen:MutableState<Screen> =mutableStateOf(Screen.LoginScreen)

@@ -1,7 +1,6 @@
 package com.example.myapplication.Screens
 
 import android.annotation.SuppressLint
-import android.widget.Button
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
@@ -12,10 +11,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,37 +25,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.Navigator
-import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.Components.ErrandsScreen
+import com.example.myapplication.Components.AllErrands
 import com.example.myapplication.Components.TaskComponent
 import com.example.myapplication.Components.TopBar
+import com.example.myapplication.datastore.StoreErrandType
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DashBoardScreen() {
-    var selectedScreen by remember{ mutableStateOf(1) }
-    val screens= listOf("Calender","Home","Notification")
-    val names=listOf("Calender","Home","Notification")
 
-TopBar()
+    var selectedScreen by remember{ mutableStateOf(0) }
+    val screens= listOf("Home","Calender","Notification","Messages")
+    val names=listOf("Home","Calender","Notification","Messages")
+
+
+
     Scaffold(
+
         bottomBar = {
             BottomNavigation(
             modifier = Modifier
                 .height(80.dp)
-                .padding(start = 5.dp, end = 5.dp)
                 .clip(
                     RoundedCornerShape(
                         topStart = 25.dp,
@@ -62,14 +65,15 @@ TopBar()
                         bottomEnd = 0.dp
                     )
                 ),
-            backgroundColor =Color(android.graphics.Color.parseColor("#38A505")),
+            backgroundColor =Color.Black,
             elevation = 0.dp,
         ) {
             screens.forEachIndexed { index, _ ->
                 val icon: ImageVector = when (index){
-                    0 -> Icons.Filled.DateRange
-                    1 -> Icons.Filled.Home
+                    0 -> Icons.Filled.Home
+                    1 -> Icons.Filled.DateRange
                     2 -> Icons.Filled.MailOutline
+                    3 ->Icons.Filled.AccountCircle
 
                     else -> Icons.Filled.Home
 
@@ -95,24 +99,36 @@ TopBar()
 
                         }
 
-                    }, label = { when(index){
-                        0 ->Text(text ="Your Errands" )
-                        1 ->Text(text ="Home" )
-                        2 ->Text(text ="Messages")
+                    }, label =  { when(index){
+                        0 ->Text(
+                            color=Color.White,
+                            text ="Errands"
+                        )
+                        1 ->Text( color=Color.White,
+                            text ="Calender" )
+                        2 ->Text(
+                            color=Color.White,
+                            text ="Messages")
+                        3 ->Text(
+                            color=Color.White,
+                            text="Profile")
                     }}
                 )
             }
         }
         }
     ) { when(selectedScreen){
-        0-> TaskComponent()
-        1-> TopBar()
+        0-> AllErrands()
+        1-> TaskComponent()
         2-> Text(text ="Coming next" )
+        3-> TopBar()
     }
 
 
     }
 }
+
+
 
 
 @Preview

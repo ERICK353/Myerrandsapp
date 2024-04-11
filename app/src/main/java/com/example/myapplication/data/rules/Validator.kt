@@ -28,6 +28,28 @@ return ValidationResult(
             statusValue
         )
     }
+    fun validateErrandType(errandType:String):ValidationResult{
+        return ValidationResult(
+            (!errandType.isNullOrEmpty()&&errandType.length>=4)
+        )
+    }
+    fun validateErrandLocation(errandLocation:String):ValidationResult{
+        return ValidationResult(
+            (!errandLocation.isNullOrEmpty()&&errandLocation.length>=4)
+        )
+    }
+    fun validateErrandAddress(errandAddress:String):ValidationResult{
+        return ValidationResult(
+            (!errandAddress.isNullOrEmpty()&&errandAddress.length>=4)
+        )
+    }
+    fun validateShortDescription(ShortDescription:String):ValidationResult{
+        return ValidationResult(
+            (!ShortDescription.isNullOrEmpty()&&ShortDescription.length>=8)
+        )
+    }
+
+
 }
 data class ValidationResult(
     val status:Boolean=false
