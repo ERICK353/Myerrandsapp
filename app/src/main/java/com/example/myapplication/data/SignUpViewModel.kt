@@ -2,15 +2,16 @@ package com.example.myapplication.data
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.ErrandAppRouter
+import com.example.myapplication.Screens.AddErrandScreen
 import com.example.myapplication.data.rules.Validator
 import com.google.firebase.auth.FirebaseAuth
 
 class SignUpViewModel: ViewModel() {
      lateinit var navController:NavController
-
     private val TAG=SignUpViewModel::class.simpleName
     var registrationUIState= mutableStateOf(RegistrationUIState())
     var AllValidationPassed= mutableStateOf(false)

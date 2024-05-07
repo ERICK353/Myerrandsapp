@@ -36,9 +36,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.Components.AllErrands
+import com.example.myapplication.Components.LazylistDisplay
 import com.example.myapplication.Components.TaskComponent
 import com.example.myapplication.Components.TopBar
 import com.example.myapplication.datastore.StoreErrandType
+import com.google.firebase.database.FirebaseDatabase
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -119,7 +121,7 @@ fun DashBoardScreen() {
         }
     ) { when(selectedScreen){
         0-> AllErrands()
-        1-> TaskComponent()
+        1-> LazylistDisplay()
         2-> Text(text ="Coming next" )
         3-> TopBar()
     }

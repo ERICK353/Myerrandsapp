@@ -4,8 +4,8 @@ package com.example.myapplication.data.rules
 
 object Validator {
     fun validateFirstName(fName:String):ValidationResult{
-return ValidationResult(
-    (!fName.isNullOrEmpty()&&fName.length>=4)
+        return ValidationResult(
+         (!fName.isNullOrEmpty()&&fName.length>=4)
 )
     }
     fun validateLastName(lName:String):ValidationResult{
@@ -45,7 +45,7 @@ return ValidationResult(
     }
     fun validateShortDescription(ShortDescription:String):ValidationResult{
         return ValidationResult(
-            (!ShortDescription.isNullOrEmpty()&&ShortDescription.length>=8)
+            (!ShortDescription.isNullOrEmpty()&&ShortDescription.length>=4)
         )
     }
 

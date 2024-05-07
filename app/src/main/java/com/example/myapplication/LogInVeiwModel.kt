@@ -12,6 +12,9 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class LogInVeiwModel:ViewModel() {
+
+
+
     private val TAG=LogInVeiwModel::class.simpleName
     var loginuistate= mutableStateOf(LoginUIState())
     var allValidationsPassed= mutableStateOf(false)
